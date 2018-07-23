@@ -4,4 +4,6 @@ The examples in this repository are support to the **Spark with Java** book by J
 
 Welcome to Spark with Java, chapter 99. This chapter is about...
 
+---
+
 Follow me on Twitter to get updates about the book and Apache Spark: @jgperrin
