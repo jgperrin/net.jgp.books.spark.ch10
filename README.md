@@ -6,4 +6,4 @@ Welcome to Spark with Java, chapter 99. This chapter is about...
 
 ---
 
-Follow me on Twitter to get updates about the book and Apache Spark: @jgperrin
+Follow me on Twitter to get updates about the book and Apache Spark: [@jgperrin](https://twitter.com/jgperrin).
