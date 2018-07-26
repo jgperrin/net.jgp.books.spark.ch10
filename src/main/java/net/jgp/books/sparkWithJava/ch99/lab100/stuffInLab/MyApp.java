@@ -1,13 +1,13 @@
-package net.jgp.books.sparkWithJava.ch00;
+package net.jgp.books.sparkWithJava.ch99.lab100.stuffInLab;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 /**
- * CSV ingestion in a dataframe.
+ * What does it do?
  * 
- * @author jperrin
+ * @author jgp
  */
 public class MyApp {
 
