@@ -1,8 +1,8 @@
-The examples in this repository are support to the **Spark with Java** book by Jean Georges Perrin and published by Manning. Find out more about the book at: [https://www.manning.com/books/spark-with-java](https://www.manning.com/books/spark-with-java).
+The examples in this repository are support to the **Spark in Action** book by Jean Georges Perrin and published by Manning. Find out more about the book at: [https://www.manning.com/perrin](https://www.manning.com/perrin).
 
-# Spark with Java - chapter 99
+# Spark in Action, with plenty of Java examples! - chapter 10
 
-Welcome to Spark with Java, chapter 99. This chapter is about...
+Welcome to Spark in Action, chapter 10. This chapter is about ingesting streaming data.
 
 ---
 
