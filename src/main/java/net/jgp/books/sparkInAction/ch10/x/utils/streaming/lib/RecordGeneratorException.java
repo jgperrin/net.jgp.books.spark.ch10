@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator;
+package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
 public class RecordGeneratorException extends Exception {
 	private static final long serialVersionUID = 4046912590125990484L;

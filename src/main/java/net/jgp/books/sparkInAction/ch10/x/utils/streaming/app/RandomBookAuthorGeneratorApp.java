@@ -1,9 +1,9 @@
 package net.jgp.books.sparkInAction.ch10.x.utils.streaming.app;
 
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordGeneratorUtils;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordStructure;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordType;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordWriterUtils;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUtils;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordStructure;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordType;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
 
 public class RandomBookAuthorGeneratorApp {
 

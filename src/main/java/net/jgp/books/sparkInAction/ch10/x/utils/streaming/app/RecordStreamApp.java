@@ -1,9 +1,9 @@
 package net.jgp.books.sparkInAction.ch10.x.utils.streaming.app;
 
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordGeneratorUtils;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordStructure;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordType;
-import net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator.RecordWriterUtils;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUtils;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordStructure;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordType;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
 
 /**
  * This application generates a series of random records at random interval
@@ -38,8 +38,7 @@ public class RecordStreamApp {
     rs.add("age", RecordType.AGE);
     rs.add("ssn", RecordType.SSN);
 
-    RecordStreamApp app =
-        new RecordStreamApp();
+    RecordStreamApp app = new RecordStreamApp();
     app.start(rs);
   }
 

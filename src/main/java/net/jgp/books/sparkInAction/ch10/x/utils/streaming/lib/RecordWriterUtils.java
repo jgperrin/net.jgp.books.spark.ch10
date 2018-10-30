@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator;
+package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +6,6 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
 public abstract class RecordWriterUtils {
   private static final Logger log = LoggerFactory.getLogger(RecordWriterUtils.class);

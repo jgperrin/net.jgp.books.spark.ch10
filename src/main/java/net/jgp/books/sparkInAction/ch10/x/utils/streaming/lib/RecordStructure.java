@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator;
+package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
