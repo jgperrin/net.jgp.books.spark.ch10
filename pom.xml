@@ -5,7 +5,7 @@
  <modelVersion>4.0.0</modelVersion>
 
  <groupId>net.jgp.books</groupId>
- <artifactId>sparkWithJava-chapter00</artifactId>
+ <artifactId>sparkInAction-chapter10</artifactId>
  <version>1.0.0-SNAPSHOT</version>
  <packaging>jar</packaging>
 
@@ -81,7 +81,7 @@
 
  </dependencies>
 
- <!-- Build -->
+ <!-- Build and execute -->
  <build>
   <plugins>
    <plugin>
@@ -92,6 +92,34 @@
      <source>${java.version}</source>
      <target>${java.version}</target>
     </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.6.0</version>
+    <executions>
+     <execution>
+      <id>write-in-stream</id>
+      <goals>
+       <goal>java</goal>
+      </goals>
+      <configuration>
+       <mainClass>net.jgp.books.sparkInAction.ch10.x.utils.streaming.app.RecordStreamApp</mainClass>
+      </configuration>
+     </execution>
+     <execution>
+      <id>lab100</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-Dlog4j.configuration=file:src/main/java/log4j.properties</argument>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.sparkInAction.ch10.lab100.readStream.ReadLinesFromFileStream</argument>
+       </arguments>
+      </configuration>
+     </execution>
+    </executions>
    </plugin>
   </plugins>
  </build>

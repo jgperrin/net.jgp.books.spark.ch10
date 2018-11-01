@@ -17,16 +17,16 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUti
  */
 class RecordGeneratorUtilsTest {
 
-	@Test
-	void testGetFirstName() {
-		for (int i = 0; i < 10; i++) {
-			String firstName = RecordGeneratorUtils.getFirstName();
-			if (firstName == null) {
-				assertFalse("First name cannot be null", firstName == null);
-			}
-			System.out.println("First name: " + firstName);
-		}
-		assertTrue("Displayed first names", true);
-	}
+  @Test
+  void testGetFirstName() {
+    for (int i = 0; i < 10; i++) {
+      String firstName = RecordGeneratorUtils.getFirstName();
+      if (firstName == null) {
+        assertFalse("First name cannot be null", firstName == null);
+      }
+      System.out.println("First name: " + firstName);
+    }
+    assertTrue("Displayed first names", true);
+  }
 
 }

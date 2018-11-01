@@ -11,13 +11,16 @@ import org.slf4j.LoggerFactory;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
-
-public class ReadLinesFromFileStream {
+/**
+ * Reads a stream from a stream (files) and 
+ * @author jgp
+ */
+public class ReadLinesFromFileStreamApp {
   private static transient Logger log = LoggerFactory.getLogger(
-      ReadLinesFromFileStream.class);
+      ReadLinesFromFileStreamApp.class);
 
   public static void main(String[] args) {
-    ReadLinesFromFileStream app = new ReadLinesFromFileStream();
+    ReadLinesFromFileStreamApp app = new ReadLinesFromFileStreamApp();
     app.start();
   }
 
@@ -34,18 +37,21 @@ public class ReadLinesFromFileStream {
         .format("text")
         .load(StreamingUtils.getInputDirectory());
 
-    StreamingQuery query = df.writeStream().outputMode(OutputMode.Update())
-        .format("console").start();
+    StreamingQuery query = df
+        .writeStream()
+        .outputMode(OutputMode.Update())
+        .format("console")
+        .start();
 
     try {
-      query.awaitTermination();
+      query.awaitTermination(5000); // the query will stop in 5000ms
     } catch (StreamingQueryException e) {
-      log.error("Exception while waiting for query to end {}.", e.getMessage(),
+      log.error(
+          "Exception while waiting for query to end {}.",
+          e.getMessage(),
           e);
     }
 
-    // Never executed
-    df.show();
-    df.printSchema();
+    log.debug("<- start()");
   }
 }

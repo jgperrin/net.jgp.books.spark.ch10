@@ -2,6 +2,11 @@ package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
 import java.io.File;
 
+/**
+ * Series of utilities for streaming
+ * 
+ * @author jgp
+ */
 public class StreamingUtils {
 
   private String inputDirectory;

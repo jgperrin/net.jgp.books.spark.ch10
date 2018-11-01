@@ -2,7 +2,7 @@ package net.jgp.books.sparkInAction.ch10.x.utils.streaming.app;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUtils;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordStructure;
-import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordType;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.FieldType;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
 
 /**
@@ -31,12 +31,12 @@ public class RecordStreamApp {
   public int waitTime = 5;
 
   public static void main(String[] args) {
-    RecordStructure rs = new RecordStructure("contact");
-    rs.add("fname", RecordType.FIRST_NAME);
-    rs.add("mname", RecordType.FIRST_NAME);
-    rs.add("lname", RecordType.LAST_NAME);
-    rs.add("age", RecordType.AGE);
-    rs.add("ssn", RecordType.SSN);
+    RecordStructure rs = new RecordStructure("contact")
+        .add("fname", FieldType.FIRST_NAME)
+        .add("mname", FieldType.FIRST_NAME)
+        .add("lname", FieldType.LAST_NAME)
+        .add("age", FieldType.AGE)
+        .add("ssn", FieldType.SSN);
 
     RecordStreamApp app = new RecordStreamApp();
     app.start(rs);

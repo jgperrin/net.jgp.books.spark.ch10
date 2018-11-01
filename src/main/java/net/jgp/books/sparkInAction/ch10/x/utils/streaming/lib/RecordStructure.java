@@ -8,12 +8,22 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * A structure for holding and building a record.
+ * 
+ * @author jgp
+ */
 public class RecordStructure {
-  private static final Logger log = LoggerFactory.getLogger(RecordStructure.class);
-  
+  private static final Logger log = LoggerFactory.getLogger(
+      RecordStructure.class);
+
   private String recordName;
   private LinkedHashMap<String, ColumnProperty> columns;
   private List<Integer> identifiers;
+
+  /**
+   * A record can be linked to another to ease joints.
+   */
   private RecordStructure linkedRecord;
 
   public RecordStructure(String recordName) {
@@ -31,20 +41,32 @@ public class RecordStructure {
     this.linkedRecord = linkedRecord;
   }
 
-  public void add(String columnName, RecordType recordType) {
-    add(columnName, recordType, null);
+  public RecordStructure add(String columnName, FieldType recordType) {
+    return add(columnName, recordType, null);
   }
 
-  public void add(String columnName, RecordType recordType, String option) {
+  public RecordStructure add(String columnName, FieldType recordType,
+      String option) {
     ColumnProperty cp = new ColumnProperty(recordType, option);
     this.columns.put(columnName, cp);
+    return this;
   }
 
+  /**
+   * Builds random records.
+   * 
+   * @param recordCount
+   *          Number of records you wish to have
+   * @param header
+   *          <code>true</code> if you want a header
+   * @return The records as a block in a StrngBuilder
+   */
   public StringBuilder getRecords(int recordCount, boolean header) {
     StringBuilder record = new StringBuilder();
     boolean first = true;
     if (header) {
-      for (Map.Entry<String, ColumnProperty> entry : this.columns.entrySet()) {
+      for (Map.Entry<String, ColumnProperty> entry : this.columns
+          .entrySet()) {
         if (first) {
           first = false;
         } else {
@@ -57,7 +79,8 @@ public class RecordStructure {
     }
 
     for (int i = 0; i < recordCount; i++) {
-      for (Map.Entry<String, ColumnProperty> entry : this.columns.entrySet()) {
+      for (Map.Entry<String, ColumnProperty> entry : this.columns
+          .entrySet()) {
         if (first) {
           first = false;
         } else {
@@ -71,7 +94,8 @@ public class RecordStructure {
             record.append(RecordGeneratorUtils.getLastName());
             break;
           case AGE:
-            record.append(RecordGeneratorUtils.getRandomInt(114) + 1);
+            record.append(RecordGeneratorUtils
+                .getRandomInt(RecordGeneratorK.MAX_AGE - 1) + 1);
             break;
           case SSN:
             record.append(RecordGeneratorUtils.getRandomSSN());
@@ -93,16 +117,18 @@ public class RecordStructure {
             }
             break;
           case DATE_LIVING_PERSON:
-            record.append(RecordGeneratorUtils.getLivingPersonDateOfBirth(entry
-                .getValue().getOption()));
+            record.append(RecordGeneratorUtils.getLivingPersonDateOfBirth(
+                entry
+                    .getValue().getOption()));
           default:
+            log.warn("{} is not a valid field type", entry.getValue().getRecordType());
             break;
         }
       }
       record.append('\n');
       first = true;
     }
-    log.debug("Generarted data:\n{}", record.toString());
+    log.debug("Generated data:\n{}", record.toString());
     return record;
   }
 

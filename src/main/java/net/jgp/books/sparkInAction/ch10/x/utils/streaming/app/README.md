@@ -1,4 +1,8 @@
 Applications using the record generator library
-=
+===
 
-Simple record generator. See usage in streaming utilities.
+RecordStreamApp
+---
+
+Simple flow of records being generated in a flow
+

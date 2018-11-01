@@ -1,20 +1,25 @@
 package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
+/**
+ * Defines the properties of a column for a record.
+ * 
+ * @author jgp
+ */
 public class ColumnProperty {
 
-  private RecordType recordType;
+  private FieldType recordType;
   private String option;
 
-  public ColumnProperty(RecordType recordType, String option) {
+  public ColumnProperty(FieldType recordType, String option) {
     this.recordType = recordType;
     this.option = option;
   }
 
-  public RecordType getRecordType() {
+  public FieldType getRecordType() {
     return recordType;
   }
 
-  public void setRecordType(RecordType recordType) {
+  public void setRecordType(FieldType recordType) {
     this.recordType = recordType;
   }
 
