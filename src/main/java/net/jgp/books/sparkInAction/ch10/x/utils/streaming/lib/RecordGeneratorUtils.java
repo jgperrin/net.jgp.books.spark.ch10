@@ -16,11 +16,12 @@ import java.util.List;
 public class RecordGeneratorUtils {
   private static RecordGeneratorUtils instance = null;
 
-  
   private List<String> femaleFirstNames;
   private int femaleFirstNamesCount;
   private List<String> maleFirstNames;
   private int maleFirstNamesCount;
+  private List<String> lastNames;
+  private int lastNamesCount;
 
   private RecordGeneratorUtils() throws RecordGeneratorException {
     try {
@@ -41,6 +42,15 @@ public class RecordGeneratorUtils {
       throw new RecordGeneratorException("No male first name available", e);
     }
     maleFirstNamesCount = maleFirstNames.size();
+
+    try {
+      lastNames = Files.readAllLines(new File(
+          "data/last_names.txt").toPath(),
+          Charset.defaultCharset());
+    } catch (IOException e) {
+      throw new RecordGeneratorException("No last name available", e);
+    }
+    lastNamesCount = lastNames.size();
   }
 
   private static RecordGeneratorUtils getInstance() {
@@ -56,15 +66,13 @@ public class RecordGeneratorUtils {
     return RecordGeneratorUtils.instance;
   }
 
-  private static String[] lnames = { "Smith", "Mills", "Perrin", "Foster",
-      "Kumar", "Jones", "Tutt", "Main", "Haque", "Christie", "Khan", "Kahn",
-      "Hahn", "Sanders" };
-  private static String[] articles = { "The", "My", "A", "Your", "Their" };
+  private static String[] articles = { "The", "My", "A", "Your", "Their",
+      "Our" };
   private static String[] adjectives = { "", "Great", "Beautiful", "Better",
-      "Worse", "Gorgeous", "Terrific",
+      "Worse", "Gorgeous", "Terrific", "Fantastic", "Nebulous", "Colorful",
       "Terrible", "Natural", "Wild" };
   private static String[] nouns = { "Life", "Trip", "Experience", "Work",
-      "Job", "Beach" };
+      "Job", "Beach", "Sky" };
   private static int[] daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
       31, 30, 31 };
 
@@ -94,8 +102,8 @@ public class RecordGeneratorUtils {
   }
 
   private String getMaleFirstName0() {
-    String firstName = maleFirstNames.get(getRandomInt(
-        maleFirstNamesCount));
+    String firstName = maleFirstNames.get(
+        getRandomInt(maleFirstNamesCount));
     if (firstName.startsWith("#") == true) {
       return getMaleFirstName0();
     }
@@ -103,8 +111,8 @@ public class RecordGeneratorUtils {
   }
 
   private String getFemaleFirstName0() {
-    String firstName = femaleFirstNames.get(getRandomInt(
-        femaleFirstNamesCount));
+    String firstName = femaleFirstNames.get(
+        getRandomInt(femaleFirstNamesCount));
     if (firstName.startsWith("#") == true) {
       return getFemaleFirstName0();
     }
@@ -112,7 +120,15 @@ public class RecordGeneratorUtils {
   }
 
   public static String getLastName() {
-    return lnames[getRandomInt(lnames.length)];
+    return getInstance().getLastName0();
+  }
+ 
+  private String getLastName0() {
+    String name = lastNames.get(getRandomInt(lastNamesCount));
+    if (name.startsWith("#") == true) {
+      return getLastName0();
+    }
+    return name;
   }
 
   public static String getArticle() {
@@ -160,7 +176,8 @@ public class RecordGeneratorUtils {
    */
   public static String getLivingPersonDateOfBirth(String format) {
     Calendar d = Calendar.getInstance();
-    int year = d.get(Calendar.YEAR) - getRandomInt(RecordGeneratorK.MAX_AGE);
+    int year = d.get(Calendar.YEAR) - getRandomInt(
+        RecordGeneratorK.MAX_AGE);
     int month = getRandomInt(12);
     int day = getRandomInt(daysInMonth[month]) + 1;
     d.set(year, month, day);

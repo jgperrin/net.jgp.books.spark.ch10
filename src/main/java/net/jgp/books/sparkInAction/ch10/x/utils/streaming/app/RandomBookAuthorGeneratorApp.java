@@ -26,12 +26,11 @@ public class RandomBookAuthorGeneratorApp {
         .add("authorId", FieldType.LINKED_ID);
 
     RandomBookAuthorGeneratorApp app = new RandomBookAuthorGeneratorApp();
-    app.start(rsAuthor);
-    app.start(rsBook);
+    app.start(rsAuthor, RecordGeneratorUtils.getRandomInt(4) + 2);
+    app.start(rsBook, RecordGeneratorUtils.getRandomInt(10) + 1);
   }
 
-  private void start(RecordStructure rs) {
-    int maxRecord = RecordGeneratorUtils.getRandomInt(100) + 1;
+  private void start(RecordStructure rs, int maxRecord) {
     RecordWriterUtils.write(
         rs.getRecordName() + "_" + System.currentTimeMillis() + ".txt",
         rs.getRecords(maxRecord, true));

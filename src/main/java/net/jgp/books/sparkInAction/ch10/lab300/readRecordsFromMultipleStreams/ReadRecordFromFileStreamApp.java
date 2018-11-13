@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab110.readRecordFromStream;
+package net.jgp.books.sparkInAction.ch10.lab300.readRecordsFromMultipleStreams;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -41,7 +41,7 @@ public class ReadRecordFromFileStreamApp {
         .readStream()
         .format("csv")
         .schema(recordSchema)
-        .load(StreamingUtils.getInputDirectory());
+        .csv(StreamingUtils.getInputDirectory());
 
     StreamingQuery query = df
         .writeStream()
