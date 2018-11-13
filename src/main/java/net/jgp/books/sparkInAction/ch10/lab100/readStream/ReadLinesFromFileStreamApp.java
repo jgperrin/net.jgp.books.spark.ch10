@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
 /**
- * Reads a stream from a stream (files) and 
+ * Reads a stream from a stream (files) and
+ * 
  * @author jgp
  */
 public class ReadLinesFromFileStreamApp {
@@ -41,10 +42,12 @@ public class ReadLinesFromFileStreamApp {
         .writeStream()
         .outputMode(OutputMode.Update())
         .format("console")
+        .option("truncate", false)
+        .option("numRows", 3)
         .start();
 
     try {
-      query.awaitTermination(50000); // the query will stop in 5000ms
+      query.awaitTermination(60000); // the query will stop in a minute
     } catch (StreamingQueryException e) {
       log.error(
           "Exception while waiting for query to end {}.",

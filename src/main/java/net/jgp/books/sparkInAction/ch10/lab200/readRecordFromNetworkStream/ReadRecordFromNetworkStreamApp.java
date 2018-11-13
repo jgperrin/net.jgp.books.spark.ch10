@@ -45,7 +45,7 @@ public class ReadRecordFromNetworkStreamApp {
         .start();
 
     try {
-      query.awaitTermination(60000);
+      query.awaitTermination(180000);
     } catch (StreamingQueryException e) {
       log.error(
           "Exception while waiting for query to end {}.",
@@ -55,8 +55,5 @@ public class ReadRecordFromNetworkStreamApp {
 
     // Executed only after a nice kill
     log.debug("Query status: {}", query.status());
-    df.show();
-    df.printSchema();
-    log.debug("The dataframe contains {} record(s).", df.count());
   }
 }

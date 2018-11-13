@@ -11,7 +11,7 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
  * 
  * @author jgp
  */
-public class RecordStreamApp {
+public class RecordsInFilesGeneratorApp {
 
   /**
    * Streaming duration in seconds.
@@ -38,7 +38,7 @@ public class RecordStreamApp {
         .add("age", FieldType.AGE)
         .add("ssn", FieldType.SSN);
 
-    RecordStreamApp app = new RecordStreamApp();
+    RecordsInFilesGeneratorApp app = new RecordsInFilesGeneratorApp();
     app.start(rs);
   }
 

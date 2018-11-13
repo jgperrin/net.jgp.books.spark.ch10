@@ -99,12 +99,12 @@
     <version>1.6.0</version>
     <executions>
      <execution>
-      <id>write-in-stream</id>
+      <id>generate-records-in-files</id>
       <goals>
        <goal>java</goal>
       </goals>
       <configuration>
-       <mainClass>net.jgp.books.sparkInAction.ch10.x.utils.streaming.app.RecordStreamApp</mainClass>
+       <mainClass>net.jgp.books.sparkInAction.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
       </configuration>
      </execution>
      <execution>
