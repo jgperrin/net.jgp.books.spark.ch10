@@ -5,7 +5,6 @@ package net.jgp.books.sparkInAction.ch10.x.utils.recordGenerator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
