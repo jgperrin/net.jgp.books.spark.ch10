@@ -6,12 +6,8 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
-import org.apache.spark.sql.types.StructType;
-import org.apache.spark.streaming.StreamingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
 public class ReadRecordFromNetworkStreamApp {
   private static transient Logger log = LoggerFactory.getLogger(

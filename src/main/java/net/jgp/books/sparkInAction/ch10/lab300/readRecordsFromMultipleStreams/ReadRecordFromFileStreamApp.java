@@ -7,7 +7,6 @@ import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
 import org.apache.spark.sql.types.StructType;
-import org.apache.spark.streaming.StreamingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
