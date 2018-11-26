@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
-public class ProcessStreamRecordThroughForEachApp {
-  private static transient Logger log = LoggerFactory
-      .getLogger(ProcessStreamRecordThroughForEachApp.class);
+public class StreamRecordThroughForEachApp {
+  private static Logger log =
+      LoggerFactory.getLogger(StreamRecordThroughForEachApp.class);
 
   public static void main(String[] args) {
-    ProcessStreamRecordThroughForEachApp app = new ProcessStreamRecordThroughForEachApp();
+    StreamRecordThroughForEachApp app = new StreamRecordThroughForEachApp();
     app.start();
   }
 
@@ -47,7 +47,7 @@ public class ProcessStreamRecordThroughForEachApp {
         .outputMode(OutputMode.Update())
         .foreach(new ConsoleDebugger())
         .start();
-    
+
     try {
       query.awaitTermination(60000);
     } catch (StreamingQueryException e) {
