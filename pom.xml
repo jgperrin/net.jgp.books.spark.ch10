@@ -107,6 +107,7 @@
        <mainClass>net.jgp.books.sparkInAction.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
       </configuration>
      </execution>
+
      <execution>
       <id>lab100</id>
       <configuration>
@@ -115,10 +116,24 @@
         <argument>-Dlog4j.configuration=file:src/main/java/log4j.properties</argument>
         <argument>-classpath</argument>
         <classpath />
-        <argument>net.jgp.books.sparkInAction.ch10.lab100.readStream.ReadLinesFromFileStream</argument>
+        <argument>net.jgp.books.sparkInAction.ch10.lab100ReadStream.ReadLinesFromFileStreamApp</argument>
        </arguments>
       </configuration>
      </execution>
+
+     <execution>
+      <id>lab110</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-Dlog4j.configuration=file:src/main/java/log4j.properties</argument>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.sparkInAction.ch10.lab110ReadRecordFromStream.ReadRecordFromFileStreamApp</argument>
+       </arguments>
+      </configuration>
+     </execution>
+
     </executions>
    </plugin>
   </plugins>

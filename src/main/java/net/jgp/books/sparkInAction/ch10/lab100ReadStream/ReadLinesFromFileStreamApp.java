@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab100.readStream;
+package net.jgp.books.sparkInAction.ch10.lab100ReadStream;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

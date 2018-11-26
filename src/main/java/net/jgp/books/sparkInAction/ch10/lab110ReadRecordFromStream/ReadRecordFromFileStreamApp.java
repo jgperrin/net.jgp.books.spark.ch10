@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab200.readRecordFromNetworkStream;
+package net.jgp.books.sparkInAction.ch10.lab110ReadRecordFromStream;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -6,16 +6,18 @@ import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
 import org.apache.spark.sql.streaming.StreamingQueryException;
+import org.apache.spark.sql.types.StructType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ReadRecordFromNetworkStreamApp {
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
+
+public class ReadRecordFromFileStreamApp {
   private static transient Logger log = LoggerFactory.getLogger(
-      ReadRecordFromNetworkStreamApp.class);
+      ReadRecordFromFileStreamApp.class);
 
   public static void main(String[] args) {
-    ReadRecordFromNetworkStreamApp app =
-        new ReadRecordFromNetworkStreamApp();
+    ReadRecordFromFileStreamApp app = new ReadRecordFromFileStreamApp();
     app.start();
   }
 
@@ -23,25 +25,31 @@ public class ReadRecordFromNetworkStreamApp {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
-        .appName("Read lines over a network stream")
+        .appName("Read lines over a file stream")
         .master("local")
         .getOrCreate();
 
+    StructType recordSchema = new StructType()
+        .add("fname", "string")
+        .add("mname", "string")
+        .add("lname", "string")
+        .add("age", "integer")
+        .add("ssn", "string");
+
     Dataset<Row> df = spark
         .readStream()
-        .format("socket")
-        .option("host", "localhost")
-        .option("port", 9999)
-        .load();
+        .format("csv")
+        .schema(recordSchema)
+        .load(StreamingUtils.getInputDirectory());
 
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Update())
         .format("console")
         .start();
-
+    
     try {
-      query.awaitTermination(180000);
+      query.awaitTermination(60000);
     } catch (StreamingQueryException e) {
       log.error(
           "Exception while waiting for query to end {}.",
@@ -49,7 +57,6 @@ public class ReadRecordFromNetworkStreamApp {
           e);
     }
 
-    // Executed only after a nice kill
-    log.debug("Query status: {}", query.status());
+    log.debug("<- start()");
   }
 }

@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab300.readRecordsFromMultipleStreams;
+package net.jgp.books.sparkInAction.ch10.lab300ReadRecordsFromMultipleStreams;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;

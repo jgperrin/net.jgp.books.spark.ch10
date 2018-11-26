@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab110.readRecordFromStream;
+package net.jgp.books.sparkInAction.ch10.lab900ForEach;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -40,32 +40,13 @@ public class ReadRecordFromFileStreamApp {
         .readStream()
         .format("csv")
         .schema(recordSchema)
-        .load(StreamingUtils.getInputDirectory());
+        .csv(StreamingUtils.getInputDirectory());
 
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Update())
         .format("console")
         .start();
-
-//    stopQuery(query, 5000);
-//    Thread t = new Thread(() -> {
-//      try {
-//        Thread.sleep(5000);
-//      } catch (InterruptedException e) {
-//        // ignored
-//      }
-//      log.debug("Will stop the query now");
-//      query.stop();
-//      log.debug("Query has been stopped");
-//      try {
-//        Thread.sleep(5000);
-//      } catch (InterruptedException e) {
-//        // ignored
-//      }
-//      log.debug("Thread coming to an end");
-//    });
-//    t.start();
     
     try {
       query.awaitTermination(5000);
