@@ -29,6 +29,9 @@ public class ReadRecordFromFileStreamApp {
         .master("local")
         .getOrCreate();
 
+    // Specify the record that will be ingested.
+    // Note that the schema much match the record coming from the generator (or
+    // source)
     StructType recordSchema = new StructType()
         .add("fname", "string")
         .add("mname", "string")
@@ -47,7 +50,7 @@ public class ReadRecordFromFileStreamApp {
         .outputMode(OutputMode.Update())
         .format("console")
         .start();
-    
+
     try {
       query.awaitTermination(60000);
     } catch (StreamingQueryException e) {

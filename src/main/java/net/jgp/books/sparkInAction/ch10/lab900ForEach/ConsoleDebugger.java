@@ -20,7 +20,7 @@ public class ConsoleDebugger extends ForeachWriter<Row> {
 
   @Override
   public void process(Row arg0) {
-    // TODO Auto-generated method stub
+    
 
   }
 
