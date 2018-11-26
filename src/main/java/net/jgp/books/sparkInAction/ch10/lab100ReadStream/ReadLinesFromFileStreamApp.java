@@ -29,7 +29,7 @@ public class ReadLinesFromFileStreamApp {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
-        .appName("Read lines over a file stream")
+        .appName("Read lines from a file stream")
         .master("local")
         .getOrCreate();
 

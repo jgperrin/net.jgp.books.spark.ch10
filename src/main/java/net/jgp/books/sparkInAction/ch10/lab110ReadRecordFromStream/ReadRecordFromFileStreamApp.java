@@ -25,7 +25,7 @@ public class ReadRecordFromFileStreamApp {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
-        .appName("Read lines over a file stream")
+        .appName("Read records from a file stream")
         .master("local")
         .getOrCreate();
 
