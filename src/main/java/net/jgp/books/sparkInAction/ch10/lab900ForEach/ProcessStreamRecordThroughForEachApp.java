@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
-public class ReadRecordFromFileStreamApp {
-  private static transient Logger log = LoggerFactory.getLogger(
-      ReadRecordFromFileStreamApp.class);
+public class ProcessStreamRecordThroughForEachApp {
+  private static transient Logger log = LoggerFactory
+      .getLogger(ProcessStreamRecordThroughForEachApp.class);
 
   public static void main(String[] args) {
-    ReadRecordFromFileStreamApp app = new ReadRecordFromFileStreamApp();
+    ProcessStreamRecordThroughForEachApp app = new ProcessStreamRecordThroughForEachApp();
     app.start();
   }
 
@@ -45,11 +45,11 @@ public class ReadRecordFromFileStreamApp {
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Update())
-        .format("console")
+        .foreach(new ConsoleDebugger())
         .start();
     
     try {
-      query.awaitTermination(5000);
+      query.awaitTermination(60000);
     } catch (StreamingQueryException e) {
       log.error(
           "Exception while waiting for query to end {}.",
@@ -57,10 +57,6 @@ public class ReadRecordFromFileStreamApp {
           e);
     }
 
-    // Executed only after a nice kill
-    log.debug("Query status: {}", query.status());
-    df.show();
-    df.printSchema();
-    log.debug("The dataframe contains {} record(s).", df.count());
+    log.debug("<- start()");
   }
 }
