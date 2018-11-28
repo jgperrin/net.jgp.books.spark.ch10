@@ -55,7 +55,7 @@ public class StreamRecordOutputParquetApp {
         .writeStream()
         .outputMode(OutputMode.Append()) // File output only supports append
         .format("parquet") // Format is Apache Parquet
-        .option("path", "/tmp/spark") // Output directory
+        .option("path", "/tmp/spark/parquet") // Output directory
         .option("checkpointLocation", "/tmp/checkpoint") // check point
         .start();
 

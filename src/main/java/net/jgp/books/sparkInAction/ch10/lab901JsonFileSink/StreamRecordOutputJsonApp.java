@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab910JsonFileSink;
+package net.jgp.books.sparkInAction.ch10.lab901JsonFileSink;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
