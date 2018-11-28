@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab900FileSink;
+package net.jgp.books.sparkInAction.ch10.lab900ParquetFileSink;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -13,17 +13,17 @@ import org.slf4j.LoggerFactory;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
 /**
- * Analyzes the records on the stream and send each record to a debugger class.
+ * Saves the record in the stream in a parquet file.
  * 
  * @author jgp
  *
  */
-public class StreamRecordThroughForEachApp {
+public class StreamRecordOutputParquetApp {
   private static Logger log =
-      LoggerFactory.getLogger(StreamRecordThroughForEachApp.class);
+      LoggerFactory.getLogger(StreamRecordOutputParquetApp.class);
 
   public static void main(String[] args) {
-    StreamRecordThroughForEachApp app = new StreamRecordThroughForEachApp();
+    StreamRecordOutputParquetApp app = new StreamRecordOutputParquetApp();
     app.start();
   }
 
@@ -35,6 +35,8 @@ public class StreamRecordThroughForEachApp {
         .master("local")
         .getOrCreate();
 
+    // The record structure must match the structure of your generated record
+    // (or your real record if you are not using generated records)
     StructType recordSchema = new StructType()
         .add("fname", "string")
         .add("mname", "string")
@@ -42,6 +44,7 @@ public class StreamRecordThroughForEachApp {
         .add("age", "integer")
         .add("ssn", "string");
 
+    // Reading the record is always the same
     Dataset<Row> df = spark
         .readStream()
         .format("csv")
@@ -50,8 +53,10 @@ public class StreamRecordThroughForEachApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Update())
-        .foreach(new RecordLogDebugger())
+        .outputMode(OutputMode.Append()) // File output only supports append
+        .format("parquet") // Format is Apache Parquet
+        .option("path", "/tmp/spark") // Output directory
+        .option("checkpointLocation", "/tmp/checkpoint") // check point
         .start();
 
     try {
