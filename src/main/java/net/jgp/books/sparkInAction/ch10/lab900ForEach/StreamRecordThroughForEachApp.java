@@ -12,6 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
+/**
+ * Analyzes the records on the stream and send each record to a debugger class.
+ * 
+ * @author jgp
+ *
+ */
 public class StreamRecordThroughForEachApp {
   private static Logger log =
       LoggerFactory.getLogger(StreamRecordThroughForEachApp.class);
@@ -45,7 +51,7 @@ public class StreamRecordThroughForEachApp {
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Update())
-        .foreach(new ConsoleDebugger())
+        .foreach(new RecordLogDebugger())
         .start();
 
     try {
