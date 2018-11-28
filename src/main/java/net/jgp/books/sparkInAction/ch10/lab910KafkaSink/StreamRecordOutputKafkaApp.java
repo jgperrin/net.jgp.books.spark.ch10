@@ -53,10 +53,10 @@ public class StreamRecordOutputKafkaApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Append()) // File output only supports append
-        .format("parquet") // Format is Apache Parquet
-        .option("path", "/tmp/spark/parquet") // Output directory
-        .option("checkpointLocation", "/tmp/checkpoint") // check point
+        .outputMode(OutputMode.Update())
+        .format("kafka") // Format is Apache Kafka
+        .option("kafka.bootstrap.servers", "host1:port1,host2:port2")
+        .option("topic", "updates")
         .start();
 
     try {
