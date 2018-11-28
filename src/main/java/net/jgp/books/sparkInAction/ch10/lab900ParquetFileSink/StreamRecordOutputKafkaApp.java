@@ -18,12 +18,12 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
  * @author jgp
  *
  */
-public class StreamRecordOutputParquetApp {
+public class StreamRecordOutputKafkaApp {
   private static Logger log =
-      LoggerFactory.getLogger(StreamRecordOutputParquetApp.class);
+      LoggerFactory.getLogger(StreamRecordOutputKafkaApp.class);
 
   public static void main(String[] args) {
-    StreamRecordOutputParquetApp app = new StreamRecordOutputParquetApp();
+    StreamRecordOutputKafkaApp app = new StreamRecordOutputKafkaApp();
     app.start();
   }
 
