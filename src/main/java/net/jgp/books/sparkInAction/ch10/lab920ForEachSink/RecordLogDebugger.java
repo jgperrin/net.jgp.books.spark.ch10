@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab900ForEach;
+package net.jgp.books.sparkInAction.ch10.lab920ForEachSink;
 
 import org.apache.spark.sql.ForeachWriter;
 import org.apache.spark.sql.Row;

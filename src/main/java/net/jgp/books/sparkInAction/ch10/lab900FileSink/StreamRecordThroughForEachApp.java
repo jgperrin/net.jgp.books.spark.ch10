@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab900ForEach;
+package net.jgp.books.sparkInAction.ch10.lab900FileSink;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
