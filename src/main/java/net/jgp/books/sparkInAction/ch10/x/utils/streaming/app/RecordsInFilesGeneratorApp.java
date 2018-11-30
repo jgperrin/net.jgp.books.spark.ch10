@@ -1,8 +1,11 @@
 package net.jgp.books.sparkInAction.ch10.x.utils.streaming.app;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.FieldType;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUtils;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordStructure;
-import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.FieldType;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
@@ -13,6 +16,8 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
  * @author jgp
  */
 public class RecordsInFilesGeneratorApp {
+  private static Logger log = LoggerFactory
+      .getLogger(RecordsInFilesGeneratorApp.class);
 
   /**
    * Streaming duration in seconds.
@@ -50,6 +55,7 @@ public class RecordsInFilesGeneratorApp {
   }
 
   private void start(RecordStructure rs, String outputDirectory) {
+    log.debug("-> start (..., {})", outputDirectory);
     long start = System.currentTimeMillis();
     while (start + streamDuration * 1000 > System.currentTimeMillis()) {
       int maxRecord = RecordGeneratorUtils.getRandomInt(batchSize) + 1;

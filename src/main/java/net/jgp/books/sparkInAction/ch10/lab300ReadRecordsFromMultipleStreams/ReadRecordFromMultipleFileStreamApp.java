@@ -5,7 +5,6 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
-import org.apache.spark.sql.streaming.StreamingQueryException;
 import org.apache.spark.sql.types.StructType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,15 +54,31 @@ public class ReadRecordFromMultipleFileStreamApp {
     StreamingQuery queryStream1 = dfStream1
         .writeStream()
         .outputMode(OutputMode.Append())
-        .format("console")
+        .foreach(new AgeChecker(1))
         .start();
 
     StreamingQuery queryStream2 = dfStream2
         .writeStream()
-        .outputMode(OutputMode.Update())
-        .format("console")
+        .outputMode(OutputMode.Append())
+        .foreach(new AgeChecker(2))
         .start();
 
+    long startProcessing = System.currentTimeMillis();
+    int iterationCount = 0;
+    while (queryStream1.isActive() && queryStream2.isActive()) {
+      iterationCount++;
+      log.debug("Pass #{}", iterationCount);
+      // queryInMemoryDf.show();
+      if (startProcessing + 60000 < System.currentTimeMillis()) {
+        queryStream1.stop();
+        queryStream2.stop();
+      }
+      try {
+        Thread.sleep(2000);
+      } catch (InterruptedException e) {
+        // Simply ignored
+      }
+    }
     log.debug("<- start()");
   }
 }
