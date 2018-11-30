@@ -12,12 +12,13 @@ import org.slf4j.LoggerFactory;
 
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
-public class ReadRecordFromFileStreamApp {
+public class ReadRecordFromMultipleFileStreamApp {
   private static transient Logger log = LoggerFactory.getLogger(
-      ReadRecordFromFileStreamApp.class);
+      ReadRecordFromMultipleFileStreamApp.class);
 
   public static void main(String[] args) {
-    ReadRecordFromFileStreamApp app = new ReadRecordFromFileStreamApp();
+    ReadRecordFromMultipleFileStreamApp app =
+        new ReadRecordFromMultipleFileStreamApp();
     app.start();
   }
 
@@ -36,50 +37,33 @@ public class ReadRecordFromFileStreamApp {
         .add("age", "integer")
         .add("ssn", "string");
 
-    Dataset<Row> df = spark
+    String landingDirectoryStream1 = StreamingUtils.getInputDirectory();
+    String landingDirectoryStream2 = "/tmp/dir2"; // make sure it exists
+
+    Dataset<Row> dfStream1 = spark
         .readStream()
         .format("csv")
         .schema(recordSchema)
-        .csv(StreamingUtils.getInputDirectory());
+        .load(landingDirectoryStream1);
 
-    StreamingQuery query = df
+    Dataset<Row> dfStream2 = spark
+        .readStream()
+        .format("csv")
+        .schema(recordSchema)
+        .load(landingDirectoryStream2);
+
+    StreamingQuery queryStream1 = dfStream1
+        .writeStream()
+        .outputMode(OutputMode.Append())
+        .format("console")
+        .start();
+
+    StreamingQuery queryStream2 = dfStream2
         .writeStream()
         .outputMode(OutputMode.Update())
         .format("console")
         .start();
 
-//    stopQuery(query, 5000);
-//    Thread t = new Thread(() -> {
-//      try {
-//        Thread.sleep(5000);
-//      } catch (InterruptedException e) {
-//        // ignored
-//      }
-//      log.debug("Will stop the query now");
-//      query.stop();
-//      log.debug("Query has been stopped");
-//      try {
-//        Thread.sleep(5000);
-//      } catch (InterruptedException e) {
-//        // ignored
-//      }
-//      log.debug("Thread coming to an end");
-//    });
-//    t.start();
-    
-    try {
-      query.awaitTermination(5000);
-    } catch (StreamingQueryException e) {
-      log.error(
-          "Exception while waiting for query to end {}.",
-          e.getMessage(),
-          e);
-    }
-
-    // Executed only after a nice kill
-    log.debug("Query status: {}", query.status());
-    df.show();
-    df.printSchema();
-    log.debug("The dataframe contains {} record(s).", df.count());
+    log.debug("<- start()");
   }
 }

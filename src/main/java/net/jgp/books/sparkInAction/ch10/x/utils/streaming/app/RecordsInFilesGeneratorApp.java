@@ -4,6 +4,7 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordGeneratorUti
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordStructure;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.FieldType;
 import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.RecordWriterUtils;
+import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
 
 /**
  * This application generates a series of random records at random interval
@@ -31,6 +32,12 @@ public class RecordsInFilesGeneratorApp {
   public int waitTime = 5;
 
   public static void main(String[] args) {
+    String outputDirectory = StreamingUtils.getInputDirectory();
+    if (args.length == 2
+        && args[0].compareToIgnoreCase("--output-directory") == 0) {
+      outputDirectory = args[1];
+    }
+
     RecordStructure rs = new RecordStructure("contact")
         .add("fname", FieldType.FIRST_NAME)
         .add("mname", FieldType.FIRST_NAME)
@@ -39,16 +46,17 @@ public class RecordsInFilesGeneratorApp {
         .add("ssn", FieldType.SSN);
 
     RecordsInFilesGeneratorApp app = new RecordsInFilesGeneratorApp();
-    app.start(rs);
+    app.start(rs, outputDirectory);
   }
 
-  private void start(RecordStructure rs) {
+  private void start(RecordStructure rs, String outputDirectory) {
     long start = System.currentTimeMillis();
     while (start + streamDuration * 1000 > System.currentTimeMillis()) {
       int maxRecord = RecordGeneratorUtils.getRandomInt(batchSize) + 1;
       RecordWriterUtils.write(
           rs.getRecordName() + "_" + System.currentTimeMillis() + ".txt",
-          rs.getRecords(maxRecord, false));
+          rs.getRecords(maxRecord, false),
+          outputDirectory);
       try {
         Thread.sleep(RecordGeneratorUtils.getRandomInt(waitTime * 1000)
             + waitTime * 1000 / 2);

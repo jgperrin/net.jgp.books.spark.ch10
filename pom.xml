@@ -109,6 +109,20 @@
      </execution>
 
      <execution>
+      <id>generate-records-in-files-alt-dir</id>
+      <goals>
+       <goal>java</goal>
+      </goals>
+      <configuration>
+       <mainClass>net.jgp.books.sparkInAction.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
+       <arguments>
+        <argument>--output-directory</argument>
+        <argument>/tmp/dir2</argument>
+       </arguments>
+      </configuration>
+     </execution>
+
+     <execution>
       <id>lab100</id>
       <configuration>
        <executable>java</executable>

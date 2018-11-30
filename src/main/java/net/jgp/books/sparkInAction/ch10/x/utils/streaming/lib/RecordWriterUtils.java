@@ -1,6 +1,7 @@
 package net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -13,10 +14,28 @@ import org.slf4j.LoggerFactory;
  * @author jgp
  */
 public abstract class RecordWriterUtils {
-  private static final Logger log = LoggerFactory.getLogger(RecordWriterUtils.class);
+  private static final Logger log = LoggerFactory.getLogger(
+      RecordWriterUtils.class);
 
   public static void write(String filename, StringBuilder record) {
-    String fullFilename = StreamingUtils.getInputDirectory() + filename;
+    write(filename, record, StreamingUtils.getInputDirectory());
+  }
+
+  /**
+   * Write a record to a file.
+   * 
+   * @param filename
+   * @param record
+   * @param directory
+   */
+  public static void write(
+      String filename, 
+      StringBuilder record,
+      String directory) {
+    if (!directory.endsWith(File.separator)) {
+      directory += File.separator;
+    }
+    String fullFilename = directory + filename;
 
     log.info("Writing in: {}", fullFilename);
 
