@@ -1,4 +1,4 @@
-package net.jgp.books.sparkInAction.ch10.lab200ReadRecordFromNetworkStream;
+package net.jgp.books.sparkInAction.ch10.lab210ReadRecordFromNetworkStream;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -41,7 +41,7 @@ public class ReadRecordFromNetworkStreamApp {
         .start();
 
     try {
-      query.awaitTermination(180000);
+      query.awaitTermination(60000);
     } catch (StreamingQueryException e) {
       log.error(
           "Exception while waiting for query to end {}.",
@@ -51,5 +51,6 @@ public class ReadRecordFromNetworkStreamApp {
 
     // Executed only after a nice kill
     log.debug("Query status: {}", query.status());
+    log.debug("<- start()");
   }
 }

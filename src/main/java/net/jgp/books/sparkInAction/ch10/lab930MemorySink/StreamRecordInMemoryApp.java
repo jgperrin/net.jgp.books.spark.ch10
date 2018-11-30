@@ -5,7 +5,6 @@ import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.streaming.OutputMode;
 import org.apache.spark.sql.streaming.StreamingQuery;
-import org.apache.spark.sql.streaming.StreamingQueryException;
 import org.apache.spark.sql.types.StructType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,17 +49,30 @@ public class StreamRecordInMemoryApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Update())
+        .outputMode(OutputMode.Append())
         .format("memory")
+        .option("queryName", "people")
         .start();
 
-    try {
-      query.awaitTermination(60000);
-    } catch (StreamingQueryException e) {
-      log.error(
-          "Exception while waiting for query to end {}.",
-          e.getMessage(),
-          e);
+    // Wait and process the incoming stream for the next minute
+    Dataset<Row> queryInMemoryDf;
+    int iterationCount = 0;
+    long start = System.currentTimeMillis();
+    while (query.isActive()) {
+      queryInMemoryDf = spark.sql("SELECT * FROM people");
+      iterationCount++;
+      log.debug("Pass #{}, dataframe contains {} records",
+          iterationCount,
+          queryInMemoryDf.count());
+      queryInMemoryDf.show();
+      if (start + 60000 < System.currentTimeMillis()) {
+        query.stop();
+      }
+      try {
+        Thread.sleep(2000);
+      } catch (InterruptedException e) {
+        // Simply ignored
+      }
     }
 
     log.debug("<- start()");
