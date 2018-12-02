@@ -36,9 +36,11 @@ public class ReadRecordFromMultipleFileStreamApp {
         .add("age", "integer")
         .add("ssn", "string");
 
+    // Two directories
     String landingDirectoryStream1 = StreamingUtils.getInputDirectory();
     String landingDirectoryStream2 = "/tmp/dir2"; // make sure it exists
 
+    // Two streams
     Dataset<Row> dfStream1 = spark
         .readStream()
         .format("csv")
@@ -51,6 +53,7 @@ public class ReadRecordFromMultipleFileStreamApp {
         .schema(recordSchema)
         .load(landingDirectoryStream2);
 
+    // Each stream will be processed by the same writer
     StreamingQuery queryStream1 = dfStream1
         .writeStream()
         .outputMode(OutputMode.Append())
@@ -63,12 +66,12 @@ public class ReadRecordFromMultipleFileStreamApp {
         .foreach(new AgeChecker(2))
         .start();
 
+    // Loop through the records for 1 minute
     long startProcessing = System.currentTimeMillis();
     int iterationCount = 0;
     while (queryStream1.isActive() && queryStream2.isActive()) {
       iterationCount++;
       log.debug("Pass #{}", iterationCount);
-      // queryInMemoryDf.show();
       if (startProcessing + 60000 < System.currentTimeMillis()) {
         queryStream1.stop();
         queryStream2.stop();
