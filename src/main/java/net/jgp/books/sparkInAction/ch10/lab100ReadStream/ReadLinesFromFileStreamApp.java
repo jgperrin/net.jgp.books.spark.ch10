@@ -17,8 +17,8 @@ import net.jgp.books.sparkInAction.ch10.x.utils.streaming.lib.StreamingUtils;
  * @author jgp
  */
 public class ReadLinesFromFileStreamApp {
-  private static transient Logger log = LoggerFactory.getLogger(
-      ReadLinesFromFileStreamApp.class);
+  private static Logger log = LoggerFactory
+      .getLogger(ReadLinesFromFileStreamApp.class);
 
   public static void main(String[] args) {
     ReadLinesFromFileStreamApp app = new ReadLinesFromFileStreamApp();
