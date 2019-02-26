@@ -8,6 +8,9 @@ Additional examples demo the usage of the various sinks in Spark's structured st
 
 All examples are in Java.
 
+Notes: 
+ 1. Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10.
+
 ---
 
 Follow me on Twitter to get updates about the book and Apache Spark: [@jgperrin](https://twitter.com/jgperrin). Join the book's community on [Facebook](https://www.facebook.com/SparkWithJava/) or in [Manning's community site](https://forums.manning.com/forums/spark-in-action-second-edition?a_aid=jgp).

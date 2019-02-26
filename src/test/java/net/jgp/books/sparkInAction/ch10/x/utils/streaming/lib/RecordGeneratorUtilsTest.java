@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.junit.jupiter.api.Test;
 
+import net.jgp.books.spark.ch10.x.utils.streaming.lib.RecordGeneratorUtils;
+
 /**
  * @author jgp
  *
