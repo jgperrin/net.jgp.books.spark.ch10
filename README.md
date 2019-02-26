@@ -2,9 +2,9 @@ The examples in this repository are support to the **[Spark in Action, 2nd editi
 
 # Spark in Action, 2nd edition - chapter 10
 
-Welcome to Spark in Action, chapter 10. This chapter is about ingesting streaming data in Apache Spark. Note that the focus is on structured streaming (not discretized streaming).
+Welcome to Spark in Action, chapter 10. This chapter is about ingesting streaming data in Apache Spark. Note that the focus of this chapter is on structured streaming (not discretized streaming).
 
-Additional examples demo the usage of the various sinks in Spark's structured streaming.
+Also contains examples of the usage of the various **sinks** in Spark's structured streaming.
 
 All examples are in Java.
 
