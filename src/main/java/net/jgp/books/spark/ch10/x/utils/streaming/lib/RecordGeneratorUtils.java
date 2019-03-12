@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Utility methods to help generate random records.
@@ -84,7 +85,7 @@ public class RecordGeneratorUtils {
   }
 
   public static int getRandomInt(int i) {
-    return (int) (Math.random() * i);
+    return new Random().nextInt(i);
   }
 
   public static String getFirstName() {
