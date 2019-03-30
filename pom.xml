@@ -128,7 +128,6 @@
 						<configuration>
 							<executable>java</executable>
 							<arguments>
-								<argument>-Dlog4j.configuration=file:src/main/java/log4j.properties</argument>
 								<argument>-classpath</argument>
 								<classpath />
 								<argument>net.jgp.books.spark.ch10.lab100_read_stream.ReadLinesFromFileStreamApp</argument>
@@ -141,7 +140,6 @@
 						<configuration>
 							<executable>java</executable>
 							<arguments>
-								<argument>-Dlog4j.configuration=file:src/main/java/log4j.properties</argument>
 								<argument>-classpath</argument>
 								<classpath />
 								<argument>net.jgp.books.spark.ch10.lab110_read_record_from_stream.ReadRecordFromFileStreamApp</argument>
