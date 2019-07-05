@@ -16,6 +16,7 @@ import java.util.Random;
  */
 public class RecordGeneratorUtils {
   private static RecordGeneratorUtils instance = null;
+  private static Calendar cal = Calendar.getInstance();
 
   private List<String> femaleFirstNames;
   private int femaleFirstNamesCount;
@@ -76,6 +77,19 @@ public class RecordGeneratorUtils {
       "Job", "Beach", "Sky" };
   private static int[] daysInMonth = { 31, 28, 31, 30, 31, 30, 31, 31, 30,
       31, 30, 31 };
+  private static String[] lang = { "fr", "en", "es", "de", "it", "pt" };
+
+  public static String getLang() {
+    return lang[getRandomInt(lang.length)];
+  }
+
+  public static int getRecentYears(int i) {
+    return cal.get(Calendar.YEAR) - getRandomInt(i);
+  }
+
+  public static int getRating() {
+    return getRandomInt(3) + 3;
+  }
 
   public static String getRandomSSN() {
     return "" + getRandomInt(10) + getRandomInt(10) + getRandomInt(10) + "-"
@@ -176,15 +190,14 @@ public class RecordGeneratorUtils {
    * @return
    */
   public static String getLivingPersonDateOfBirth(String format) {
-    Calendar d = Calendar.getInstance();
-    int year = d.get(Calendar.YEAR) - getRandomInt(
+    int year = cal.get(Calendar.YEAR) - getRandomInt(
         RecordGeneratorK.MAX_AGE);
     int month = getRandomInt(12);
     int day = getRandomInt(daysInMonth[month]) + 1;
-    d.set(year, month, day);
+    cal.set(year, month, day);
 
     SimpleDateFormat sdf = new SimpleDateFormat(format);
-    return sdf.format(d.getTime());
+    return sdf.format(cal.getTime());
   }
 
 }
