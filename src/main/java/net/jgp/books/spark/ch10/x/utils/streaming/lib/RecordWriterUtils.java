@@ -29,7 +29,7 @@ public abstract class RecordWriterUtils {
    * @param directory
    */
   public static void write(
-      String filename, 
+      String filename,
       StringBuilder record,
       String directory) {
     if (!directory.endsWith(File.separator)) {
@@ -42,8 +42,10 @@ public abstract class RecordWriterUtils {
     // Open file
     BufferedWriter out = null;
     try {
-      FileWriter fstream = new FileWriter(fullFilename, true); // true tells to
-                                                               // append data.
+      FileWriter fstream = new FileWriter(fullFilename, true); // true tells
+                                                               // to
+                                                               // append
+                                                               // data.
       out = new BufferedWriter(fstream);
     } catch (IOException e) {
       log.error("Error while opening file: {}", e.getMessage());

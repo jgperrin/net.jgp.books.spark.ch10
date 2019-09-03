@@ -121,7 +121,8 @@ public class RecordStructure {
                 entry
                     .getValue().getOption()));
           default:
-            log.warn("{} is not a valid field type", entry.getValue().getRecordType());
+            log.warn("{} is not a valid field type",
+                entry.getValue().getRecordType());
             break;
         }
       }

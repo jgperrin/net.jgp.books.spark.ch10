@@ -35,7 +35,8 @@ public class StreamRecordOutputJsonApp {
         .master("local")
         .getOrCreate();
 
-    // The record structure must match the structure of your generated record
+    // The record structure must match the structure of your generated
+    // record
     // (or your real record if you are not using generated records)
     StructType recordSchema = new StructType()
         .add("fname", "string")

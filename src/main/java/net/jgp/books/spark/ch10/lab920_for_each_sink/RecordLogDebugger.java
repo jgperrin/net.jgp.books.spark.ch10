@@ -15,7 +15,7 @@ public class RecordLogDebugger extends ForeachWriter<Row> {
   private static Logger log =
       LoggerFactory.getLogger(RecordLogDebugger.class);
   private static int count = 0;
-  
+
   /**
    * Closes the writer
    */

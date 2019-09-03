@@ -12,7 +12,8 @@ import org.slf4j.LoggerFactory;
 import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingUtils;
 
 /**
- * Analyzes the records on the stream and send each record to a debugger class.
+ * Analyzes the records on the stream and send each record to a debugger
+ * class.
  * 
  * @author jgp
  *

@@ -6,7 +6,8 @@ import net.jgp.books.spark.ch10.x.utils.streaming.lib.RecordStructure;
 import net.jgp.books.spark.ch10.x.utils.streaming.lib.RecordWriterUtils;
 
 /**
- * Generates a series of authors and their books, illustrating joint records.
+ * Generates a series of authors and their books, illustrating joint
+ * records.
  * 
  * @author jgp
  *

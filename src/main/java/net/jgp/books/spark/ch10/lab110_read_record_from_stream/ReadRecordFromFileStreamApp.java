@@ -30,7 +30,8 @@ public class ReadRecordFromFileStreamApp {
         .getOrCreate();
 
     // Specify the record that will be ingested.
-    // Note that the schema much match the record coming from the generator (or
+    // Note that the schema much match the record coming from the generator
+    // (or
     // source)
     StructType recordSchema = new StructType()
         .add("fname", "string")

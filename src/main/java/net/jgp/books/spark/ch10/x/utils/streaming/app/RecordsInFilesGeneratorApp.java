@@ -30,9 +30,10 @@ public class RecordsInFilesGeneratorApp {
   public int batchSize = 10;
 
   /**
-   * Wait time between two batches of records, in seconds, with an element of
-   * variability. If you say 10 seconds, the system will wait between 5s and
-   * 15s, if you say 20s, the system will wait between 10s and 30s, and so on.
+   * Wait time between two batches of records, in seconds, with an element
+   * of variability. If you say 10 seconds, the system will wait between 5s
+   * and 15s, if you say 20s, the system will wait between 10s and 30s, and
+   * so on.
    */
   public int waitTime = 5;
 

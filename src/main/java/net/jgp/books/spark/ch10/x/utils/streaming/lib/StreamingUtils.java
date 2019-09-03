@@ -41,7 +41,8 @@ public class StreamingUtils {
     } else {
       this.inputDirectory = System.getProperty("java.io.tmpdir");
     }
-    this.inputDirectory += "streaming" + File.separator + "in" + File.separator;
+    this.inputDirectory +=
+        "streaming" + File.separator + "in" + File.separator;
     createInputDirectory(this.inputDirectory);
     this.inputSubDirectory1 += this.inputDirectory + File.separator + "s1"
         + File.separator;
