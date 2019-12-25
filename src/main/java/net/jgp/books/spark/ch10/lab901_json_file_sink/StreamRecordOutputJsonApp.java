@@ -1,5 +1,7 @@
 package net.jgp.books.spark.ch10.lab901_json_file_sink;
 
+import java.util.concurrent.TimeoutException;
+
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -24,10 +26,14 @@ public class StreamRecordOutputJsonApp {
 
   public static void main(String[] args) {
     StreamRecordOutputJsonApp app = new StreamRecordOutputJsonApp();
-    app.start();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
@@ -36,8 +42,7 @@ public class StreamRecordOutputJsonApp {
         .getOrCreate();
 
     // The record structure must match the structure of your generated
-    // record
-    // (or your real record if you are not using generated records)
+    // record (or your real record if you are not using generated records)
     StructType recordSchema = new StructType()
         .add("fname", "string")
         .add("mname", "string")

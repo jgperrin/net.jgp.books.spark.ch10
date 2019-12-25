@@ -1,5 +1,7 @@
 package net.jgp.books.spark.ch10.lab200_read_network_stream;
 
+import java.util.concurrent.TimeoutException;
+
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -14,12 +16,15 @@ public class ReadLinesFromNetworkStreamApp {
       ReadLinesFromNetworkStreamApp.class);
 
   public static void main(String[] args) {
-    ReadLinesFromNetworkStreamApp app =
-        new ReadLinesFromNetworkStreamApp();
-    app.start();
+    ReadLinesFromNetworkStreamApp app = new ReadLinesFromNetworkStreamApp();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
