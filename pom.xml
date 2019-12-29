@@ -123,25 +123,49 @@
           </execution>
 
           <execution>
-            <id>lab100</id>
+            <id>lab200</id>
             <configuration>
               <executable>java</executable>
               <arguments>
                 <argument>-classpath</argument>
                 <classpath />
-                <argument>net.jgp.books.spark.ch10.lab100_read_stream.ReadLinesFromFileStreamApp</argument>
+                <argument>net.jgp.books.spark.ch10.lab200_read_stream.ReadLinesFromFileStreamApp</argument>
               </arguments>
             </configuration>
           </execution>
 
           <execution>
-            <id>lab110</id>
+            <id>lab210</id>
             <configuration>
               <executable>java</executable>
               <arguments>
                 <argument>-classpath</argument>
                 <classpath />
-                <argument>net.jgp.books.spark.ch10.lab110_read_record_from_stream.ReadRecordFromFileStreamApp</argument>
+                <argument>net.jgp.books.spark.ch10.lab210_read_record_from_stream.ReadRecordFromFileStreamApp</argument>
+              </arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>lab300</id>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-classpath</argument>
+                <classpath />
+                <argument>net.jgp.books.spark.ch10.lab300_read_network_stream.ReadLinesFromNetworkStreamApp</argument>
+              </arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>lab400</id>
+            <configuration>
+              <executable>java</executable>
+              <arguments>
+                <argument>-classpath</argument>
+                <classpath />
+                <argument>net.jgp.books.spark.ch10.lab400_read_records_from_multiple_streams.ReadRecordFromMultipleFileStreamApp</argument>
               </arguments>
             </configuration>
           </execution>

@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch10.lab110_read_record_from_stream;
+package net.jgp.books.spark.ch10.lab210_read_record_from_stream;
 
 import java.util.concurrent.TimeoutException;
 
@@ -53,7 +53,7 @@ public class ReadRecordFromFileStreamApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Update())
+        .outputMode(OutputMode.Append())
         .format("console")
         .start();
 
