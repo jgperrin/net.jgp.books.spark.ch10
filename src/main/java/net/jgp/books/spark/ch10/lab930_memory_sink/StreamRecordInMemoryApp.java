@@ -57,23 +57,23 @@ public class StreamRecordInMemoryApp {
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Append())
-        .format("memory")
-        .option("queryName", "people")
+        .format("memory") // #A
+        .option("queryName", "people") // #B
         .start();
 
     // Wait and process the incoming stream for the next minute
-    Dataset<Row> queryInMemoryDf;
+    Dataset<Row> queryInMemoryDf; // #C
     int iterationCount = 0;
     long start = System.currentTimeMillis();
-    while (query.isActive()) {
-      queryInMemoryDf = spark.sql("SELECT * FROM people");
+    while (query.isActive()) { // #D
+      queryInMemoryDf = spark.sql("SELECT * FROM people"); // #E
       iterationCount++;
       log.debug("Pass #{}, dataframe contains {} records",
           iterationCount,
           queryInMemoryDf.count());
       queryInMemoryDf.show();
       if (start + 60000 < System.currentTimeMillis()) {
-        query.stop();
+        query.stop(); // #F
       }
       try {
         Thread.sleep(2000);
