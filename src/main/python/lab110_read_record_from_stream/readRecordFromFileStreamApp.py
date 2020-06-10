@@ -28,7 +28,7 @@ df = spark.readStream.format("csv") \
 # Use below for Windows
 # .load("C:/tmp/")
 
-query = df.writeStream.outputMode("update") \
+query = df.writeStream.outputMode("append") \
                       .format("console") \
                       .start()
 

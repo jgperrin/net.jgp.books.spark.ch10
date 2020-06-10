@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory
  */
 class StreamRecordInMemoryScalaApp {
 
-  private val log = LoggerFactory.getLogger(classOf[StreamRecordInMemoryApp])
+  private val log = LoggerFactory.getLogger(classOf[StreamRecordInMemoryScalaApp])
   def start():Unit = {
 
     log.debug("-> start()")

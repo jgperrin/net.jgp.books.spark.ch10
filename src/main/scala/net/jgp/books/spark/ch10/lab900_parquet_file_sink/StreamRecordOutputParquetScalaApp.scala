@@ -1,6 +1,6 @@
 package net.jgp.books.spark.ch10.lab900_parquet_file_sink
 
-import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingUtils
+import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingScalaUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.streaming.{OutputMode, StreamingQueryException}
 import org.apache.spark.sql.types.StructType
@@ -39,7 +39,7 @@ class StreamRecordOutputParquetScalaApp {
     val df = spark.readStream
       .format("csv")
       .schema(recordSchema)
-      .csv(StreamingUtils.getInputDirectory)
+      .csv(StreamingScalaUtils.getInputDirectory)
 
     val query = df.writeStream.outputMode(OutputMode.Append) // File output only supports append
       .format("parquet") // Format is Apache Parquet

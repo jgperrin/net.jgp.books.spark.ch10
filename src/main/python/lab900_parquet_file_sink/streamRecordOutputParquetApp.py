@@ -3,9 +3,10 @@
 
   @author rambabu.posa
 """
-from pyspark.sql import SparkSession
 import logging
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
+from pyspark.sql import SparkSession
+from pyspark.sql.types import (StructType, StructField,
+                               StringType, IntegerType)
 
 logging.debug("-> start")
 

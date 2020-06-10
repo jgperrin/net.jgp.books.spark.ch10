@@ -1,6 +1,6 @@
 package net.jgp.books.spark.ch10.lab110_read_record_from_stream
 
-import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingUtils
+import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingScalaUtils
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.streaming.{OutputMode, StreamingQueryException}
 import org.apache.spark.sql.types.StructType
@@ -38,7 +38,7 @@ class ReadRecordFromFileStreamScalaApp {
     val df = spark.readStream
       .format("csv")
       .schema(recordSchema)
-      .load(StreamingUtils.getInputDirectory)
+      .load(StreamingScalaUtils.getInputDirectory)
 
     val query = df.writeStream
       .outputMode(OutputMode.Update)

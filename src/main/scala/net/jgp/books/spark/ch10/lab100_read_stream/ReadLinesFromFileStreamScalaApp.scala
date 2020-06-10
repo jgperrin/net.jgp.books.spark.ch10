@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory
  * @author rambabu.posa
  */
 class ReadLinesFromFileStreamScalaApp {
-  private val log = LoggerFactory.getLogger(classOf[ReadLinesFromFileStreamApp])
+  private val log = LoggerFactory.getLogger(classOf[ReadLinesFromFileStreamScalaApp])
 
   def start(): Unit = {
     log.debug("-> start()")

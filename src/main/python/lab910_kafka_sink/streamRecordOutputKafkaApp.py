@@ -3,9 +3,10 @@
 
   @author rambabu.posa
 """
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 import logging
+from pyspark.sql import SparkSession
+from pyspark.sql.types import (StructType, StructField,
+                               StringType, IntegerType)
 
 logging.debug("-> start")
 
@@ -30,7 +31,7 @@ df = spark.readStream.format("csv") \
 #   .csv("C:/tmp/")
 
 # // Format is Apache Kafka
-query = df.writeStream.outputMode("update") \
+query = df.writeStream.outputMode("append") \
     .format("kafka") \
     .option("kafka.bootstrap.servers", "host1:port1,host2:port2") \
     .option("topic", "updates") \

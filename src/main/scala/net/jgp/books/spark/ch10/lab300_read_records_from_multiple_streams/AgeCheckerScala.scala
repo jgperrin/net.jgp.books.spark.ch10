@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory
 
 class AgeCheckerScala extends ForeachWriter[Row] {
 
-  private val serialVersionUID = 8383715100587612498L
   private val log = LoggerFactory.getLogger(classOf[AgeCheckerScala])
   private var streamId = 0
 
@@ -23,11 +22,11 @@ class AgeCheckerScala extends ForeachWriter[Row] {
     val age = arg0.getInt(3)
 
     if (age < 13)
-      log.debug("On stream #{}: {} is a kid, they are {} yrs old.", streamId, arg0.getString(0), age)
+      log.debug(s"On stream #${streamId}: ${arg0.getString(0)} is a kid, they are ${age} yrs old.")
     else if (age > 12 && age < 20)
-      log.debug("On stream #{}: {} is a teen, they are {} yrs old.", streamId, arg0.getString(0), age)
+      log.debug(s"On stream #${streamId}: ${arg0.getString(0)} is a teen, they are ${age} yrs old.")
     else if (age > 64)
-      log.debug("On stream #{}: {} is a senior, they are {} yrs old.", streamId, arg0.getString(0), age)
+      log.debug(s"On stream #${streamId}: ${arg0.getString(0)} is a senior, they are ${age} yrs old.")
   }
 
 }

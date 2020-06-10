@@ -17,7 +17,7 @@ df = spark.readStream.format("socket") \
     .option("port", 9999) \
     .load()
 
-query = df.writeStream.outputMode("update") \
+query = df.writeStream.outputMode("append") \
     .format("console") \
     .start()
 

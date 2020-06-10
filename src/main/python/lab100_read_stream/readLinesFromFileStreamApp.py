@@ -18,7 +18,7 @@ df = spark.readStream.format("text") \
 # Use below for Windows
 # .load("C:/tmp/")
 
-query = df.writeStream.outputMode("update") \
+query = df.writeStream.outputMode("append") \
     .format("console") \
     .option("truncate", False) \
     .option("numRows", 3) \

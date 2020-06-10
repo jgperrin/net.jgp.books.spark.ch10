@@ -3,9 +3,10 @@
 
   @author rambabu.posa
 """
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 import logging
+from pyspark.sql import SparkSession
+from pyspark.sql.types import (StructType, StructField,
+                               StringType, IntegerType)
 
 logging.debug("-> start")
 
@@ -44,7 +45,7 @@ class RecordLogDebugger:
         pass
 
 
-query = df.writeStream.outputMode("update") \
+query = df.writeStream.outputMode("append") \
     .foreach(RecordLogDebugger()) \
     .start()
 

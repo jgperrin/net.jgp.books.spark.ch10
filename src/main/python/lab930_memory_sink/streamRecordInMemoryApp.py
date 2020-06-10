@@ -3,10 +3,11 @@
 
   @author rambabu.posa
 """
-from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, IntegerType
 import logging
 import time
+from pyspark.sql import SparkSession
+from pyspark.sql.types import (StructType, StructField,
+                               StringType, IntegerType)
 
 logging.debug("-> start")
 

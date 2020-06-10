@@ -9,6 +9,7 @@ object StreamingScalaUtils {
 
   def getInputDirectory: String =
     if (System.getProperty("os.name").toLowerCase.startsWith("win")) "C:\\TEMP\\"
-    else System.getProperty("java.io.tmpdir")
+    else "/tmp"
+      //System.getProperty("java.io.tmpdir")
 
 }
