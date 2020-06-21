@@ -6,7 +6,7 @@ Welcome to Spark in Action, chapter 10. This chapter is about ingesting streamin
 
 Also contains examples of the usage of the various **sinks** in Spark's structured streaming.
 
-All examples are in Java.
+This code is designed to work with Apache Spark v2.4.4.
 
 Notes: 
  1. Due to renaming the packages to match more closely Java standards, this project is not in sync with the book's MEAP prior to v10.
