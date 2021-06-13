@@ -1,4 +1,6 @@
-package net.jgp.books.spark.ch10.lab300_read_records_from_multiple_streams;
+package net.jgp.books.spark.ch10.lab400_read_records_from_multiple_streams;
+
+import java.util.concurrent.TimeoutException;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -18,10 +20,14 @@ public class ReadRecordFromMultipleFileStreamApp {
   public static void main(String[] args) {
     ReadRecordFromMultipleFileStreamApp app =
         new ReadRecordFromMultipleFileStreamApp();
-    app.start();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()

@@ -1,153 +1,177 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
 
-  <groupId>net.jgp.books</groupId>
-  <artifactId>spark-chapter10</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+ <groupId>net.jgp.books</groupId>
+ <artifactId>spark-in-action2-chapter10</artifactId>
+ <version>1.0.0-SNAPSHOT</version>
+ <packaging>jar</packaging>
 
+ <properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <java.version>1.8</java.version>
+  <scala.version>2.12</scala.version>
+  <spark.version>3.0.0</spark.version>
+  <log4j.version>1.2.17</log4j.version>
+  <junit.version>5.3.1</junit.version>
+  <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+ </properties>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-    <scala.version>2.11</scala.version>
-    <spark.version>2.4.4</spark.version>
-    <log4j.version>1.2.17</log4j.version>
-    <junit.version>5.3.1</junit.version>
-    <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
-  </properties>
+ <dependencies>
+  <!-- Spark -->
+  <dependency>
+   <groupId>org.apache.spark</groupId>
+   <artifactId>spark-core_${scala.version}</artifactId>
+   <version>${spark.version}</version>
+  </dependency>
 
-  <dependencies>
-    <!-- Spark -->
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-core_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-    </dependency>
+  <dependency>
+   <groupId>org.apache.spark</groupId>
+   <artifactId>spark-sql_${scala.version}</artifactId>
+   <version>${spark.version}</version>
+   <exclusions>
+    <exclusion>
+     <groupId>org.slf4j</groupId>
+     <artifactId>slf4j-simple</artifactId>
+    </exclusion>
+   </exclusions>
+  </dependency>
 
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-sql_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+  <dependency>
+   <groupId>org.apache.spark</groupId>
+   <artifactId>spark-mllib_${scala.version}</artifactId>
+   <version>${spark.version}</version>
+   <exclusions>
+    <exclusion>
+     <groupId>org.slf4j</groupId>
+     <artifactId>slf4j-log4j12</artifactId>
+    </exclusion>
+    <exclusion>
+     <groupId>org.slf4j</groupId>
+     <artifactId>slf4j-simple</artifactId>
+    </exclusion>
+   </exclusions>
+  </dependency>
 
-    <dependency>
-      <groupId>org.apache.spark</groupId>
-      <artifactId>spark-mllib_${scala.version}</artifactId>
-      <version>${spark.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-log4j12</artifactId>
-        </exclusion>
-        <exclusion>
-          <groupId>org.slf4j</groupId>
-          <artifactId>slf4j-simple</artifactId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+  <dependency>
+   <groupId>log4j</groupId>
+   <artifactId>log4j</artifactId>
+   <version>${log4j.version}</version>
+  </dependency>
+  <dependency>
+   <groupId>org.slf4j</groupId>
+   <artifactId>slf4j-api</artifactId>
+   <version>1.7.16</version>
+  </dependency>
+  <dependency>
+   <groupId>org.slf4j</groupId>
+   <artifactId>slf4j-log4j12</artifactId>
+   <version>1.7.16</version>
+  </dependency>
 
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.16</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.16</version>
-    </dependency>
+  <dependency>
+   <groupId>org.junit.jupiter</groupId>
+   <artifactId>junit-jupiter-api</artifactId>
+   <version>${junit.version}</version>
+   <scope>test</scope>
+  </dependency>
 
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
+ </dependencies>
 
-  </dependencies>
+ <!-- Build and execute -->
+ <build>
+  <plugins>
+   <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>${maven-compiler-plugin.version}</version>
+    <configuration>
+     <source>${java.version}</source>
+     <target>${java.version}</target>
+    </configuration>
+   </plugin>
+   <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.6.0</version>
 
-  <!-- Build and execute -->
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
-        <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>1.6.0</version>
+    <executions>
+     <execution>
+      <id>generate-records-in-files</id>
+      <goals>
+       <goal>java</goal>
+      </goals>
+      <configuration>
+       <mainClass>net.jgp.books.spark.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
+      </configuration>
+     </execution>
 
-        <executions>
-          <execution>
-            <id>generate-records-in-files</id>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>net.jgp.books.spark.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
-            </configuration>
-          </execution>
+     <execution>
+      <id>generate-records-in-files-alt-dir</id>
+      <goals>
+       <goal>java</goal>
+      </goals>
+      <configuration>
+       <mainClass>net.jgp.books.spark.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
+       <arguments>
+        <argument>--output-directory</argument>
+        <argument>/tmp/dir2</argument>
+       </arguments>
+      </configuration>
+     </execution>
 
-          <execution>
-            <id>generate-records-in-files-alt-dir</id>
-            <goals>
-              <goal>java</goal>
-            </goals>
-            <configuration>
-              <mainClass>net.jgp.books.spark.ch10.x.utils.streaming.app.RecordsInFilesGeneratorApp</mainClass>
-              <arguments>
-                <argument>--output-directory</argument>
-                <argument>/tmp/dir2</argument>
-              </arguments>
-            </configuration>
-          </execution>
+     <execution>
+      <id>lab200</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.spark.ch10.lab200_read_stream.ReadLinesFromFileStreamApp</argument>
+       </arguments>
+      </configuration>
+     </execution>
 
-          <execution>
-            <id>lab100</id>
-            <configuration>
-              <executable>java</executable>
-              <arguments>
-                <argument>-classpath</argument>
-                <classpath />
-                <argument>net.jgp.books.spark.ch10.lab100_read_stream.ReadLinesFromFileStreamApp</argument>
-              </arguments>
-            </configuration>
-          </execution>
+     <execution>
+      <id>lab210</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.spark.ch10.lab210_read_record_from_stream.ReadRecordFromFileStreamApp</argument>
+       </arguments>
+      </configuration>
+     </execution>
 
-          <execution>
-            <id>lab110</id>
-            <configuration>
-              <executable>java</executable>
-              <arguments>
-                <argument>-classpath</argument>
-                <classpath />
-                <argument>net.jgp.books.spark.ch10.lab110_read_record_from_stream.ReadRecordFromFileStreamApp</argument>
-              </arguments>
-            </configuration>
-          </execution>
+     <execution>
+      <id>lab300</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.spark.ch10.lab300_read_network_stream.ReadLinesFromNetworkStreamApp</argument>
+       </arguments>
+      </configuration>
+     </execution>
 
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+     <execution>
+      <id>lab400</id>
+      <configuration>
+       <executable>java</executable>
+       <arguments>
+        <argument>-classpath</argument>
+        <classpath />
+        <argument>net.jgp.books.spark.ch10.lab400_read_records_from_multiple_streams.ReadRecordFromMultipleFileStreamApp</argument>
+       </arguments>
+      </configuration>
+     </execution>
+
+    </executions>
+   </plugin>
+  </plugins>
+ </build>
 </project>

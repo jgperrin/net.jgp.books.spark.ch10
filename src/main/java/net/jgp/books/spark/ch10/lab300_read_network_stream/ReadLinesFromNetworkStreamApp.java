@@ -1,4 +1,6 @@
-package net.jgp.books.spark.ch10.lab200_read_network_stream;
+package net.jgp.books.spark.ch10.lab300_read_network_stream;
+
+import java.util.concurrent.TimeoutException;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -10,16 +12,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ReadLinesFromNetworkStreamApp {
-  private static transient Logger log = LoggerFactory.getLogger(
+  private static Logger log = LoggerFactory.getLogger(
       ReadLinesFromNetworkStreamApp.class);
 
   public static void main(String[] args) {
-    ReadLinesFromNetworkStreamApp app =
-        new ReadLinesFromNetworkStreamApp();
-    app.start();
+    ReadLinesFromNetworkStreamApp app = new ReadLinesFromNetworkStreamApp();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
@@ -36,7 +41,7 @@ public class ReadLinesFromNetworkStreamApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Update())
+        .outputMode(OutputMode.Append())
         .format("console")
         .start();
 

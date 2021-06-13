@@ -1,5 +1,7 @@
 package net.jgp.books.spark.ch10.lab930_memory_sink;
 
+import java.util.concurrent.TimeoutException;
+
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
@@ -24,10 +26,14 @@ public class StreamRecordInMemoryApp {
 
   public static void main(String[] args) {
     StreamRecordInMemoryApp app = new StreamRecordInMemoryApp();
-    app.start();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
@@ -51,23 +57,23 @@ public class StreamRecordInMemoryApp {
     StreamingQuery query = df
         .writeStream()
         .outputMode(OutputMode.Append())
-        .format("memory")
-        .option("queryName", "people")
+        .format("memory") // #A
+        .option("queryName", "people") // #B
         .start();
 
     // Wait and process the incoming stream for the next minute
-    Dataset<Row> queryInMemoryDf;
+    Dataset<Row> queryInMemoryDf; // #C
     int iterationCount = 0;
     long start = System.currentTimeMillis();
-    while (query.isActive()) {
-      queryInMemoryDf = spark.sql("SELECT * FROM people");
+    while (query.isActive()) { // #D
+      queryInMemoryDf = spark.sql("SELECT * FROM people"); // #E
       iterationCount++;
       log.debug("Pass #{}, dataframe contains {} records",
           iterationCount,
           queryInMemoryDf.count());
       queryInMemoryDf.show();
       if (start + 60000 < System.currentTimeMillis()) {
-        query.stop();
+        query.stop(); // #F
       }
       try {
         Thread.sleep(2000);

@@ -1,4 +1,4 @@
-package net.jgp.books.spark.ch10.lab300_read_records_from_multiple_streams;
+package net.jgp.books.spark.ch10.lab400_read_records_from_multiple_streams;
 
 import org.apache.spark.sql.ForeachWriter;
 import org.apache.spark.sql.Row;

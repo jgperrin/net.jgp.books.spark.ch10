@@ -1,4 +1,6 @@
-package net.jgp.books.spark.ch10.lab110_read_record_from_stream;
+package net.jgp.books.spark.ch10.lab210_read_record_from_stream;
+
+import java.util.concurrent.TimeoutException;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -13,15 +15,19 @@ import org.slf4j.LoggerFactory;
 import net.jgp.books.spark.ch10.x.utils.streaming.lib.StreamingUtils;
 
 public class ReadRecordFromFileStreamApp {
-  private static transient Logger log = LoggerFactory.getLogger(
-      ReadRecordFromFileStreamApp.class);
+  private static Logger log =
+      LoggerFactory.getLogger(ReadRecordFromFileStreamApp.class);
 
   public static void main(String[] args) {
     ReadRecordFromFileStreamApp app = new ReadRecordFromFileStreamApp();
-    app.start();
+    try {
+      app.start();
+    } catch (TimeoutException e) {
+      log.error("A timeout exception has occured: {}", e.getMessage());
+    }
   }
 
-  private void start() {
+  private void start() throws TimeoutException {
     log.debug("-> start()");
 
     SparkSession spark = SparkSession.builder()
@@ -31,8 +37,7 @@ public class ReadRecordFromFileStreamApp {
 
     // Specify the record that will be ingested.
     // Note that the schema much match the record coming from the generator
-    // (or
-    // source)
+    // (or source)
     StructType recordSchema = new StructType()
         .add("fname", "string")
         .add("mname", "string")
@@ -48,7 +53,7 @@ public class ReadRecordFromFileStreamApp {
 
     StreamingQuery query = df
         .writeStream()
-        .outputMode(OutputMode.Update())
+        .outputMode(OutputMode.Append())
         .format("console")
         .start();
 

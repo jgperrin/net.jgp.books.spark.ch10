@@ -1,5 +1,7 @@
 package net.jgp.books.spark.ch10.x.utils.streaming.app;
 
+import java.io.File;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +44,8 @@ public class RecordsInFilesGeneratorApp {
     if (args.length == 2
         && args[0].compareToIgnoreCase("--output-directory") == 0) {
       outputDirectory = args[1];
+      File dir = new File(outputDirectory);
+      dir.mkdir();
     }
 
     RecordStructure rs = new RecordStructure("contact")
