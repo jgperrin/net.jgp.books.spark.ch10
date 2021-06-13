@@ -38,11 +38,13 @@ public class ReadLinesFromFileStreamApp {
         .appName("Read lines from a file stream")
         .master("local")
         .getOrCreate();
+    log.debug("Spark session initiated");
 
     Dataset<Row> df = spark
         .readStream()
         .format("text")
         .load(StreamingUtils.getInputDirectory());
+    log.debug("Dataframe read from stream");
 
     StreamingQuery query = df
         .writeStream()
@@ -51,6 +53,7 @@ public class ReadLinesFromFileStreamApp {
         .option("truncate", false)
         .option("numRows", 3)
         .start();
+    log.debug("Query ready");
 
     try {
       query.awaitTermination(60000); // the query will stop in a minute
