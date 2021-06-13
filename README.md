@@ -13,15 +13,9 @@ This code is designed to work with Apache Spark v3.0.0.
 
 Each chapter has one or more labs. Labs are examples used for teaching in the [book](https://www.manning.com/books/spark-in-action-second-edition?a_aid=jgp). You are encouraged to take ownership of the code and modify it, experiment with it, hence the use of the term **lab**. This chapter has several labs.
 
-### Lab \#100
+### Lab \#200
 
-Using a UDF using the dataframe API.
-
-The `ReadLinesFromFileStreamApp` application does the following:
-
-1.	It acquires a session (a `SparkSession`).
-2.	It asks Spark to create read stream to load (ingest) a text file.
-3.	Spark creates write stream and writes the text file data to console
+TBD.
 
 ## Running the lab in Java
 
